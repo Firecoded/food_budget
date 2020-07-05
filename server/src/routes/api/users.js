@@ -5,6 +5,7 @@ import { resolve } from 'path';
 import requireJwtAuth from '../../middleware/requireJwtAuth';
 import User, { hashPassword, validateUser } from '../../models/User';
 import Message from '../../models/Message';
+import Entry from '../../models/Entry';
 import { seedDb } from '../../utils/seed';
 
 const router = Router();
@@ -118,6 +119,7 @@ router.delete('/:id', requireJwtAuth, async (req, res) => {
 
     //delete all messages from that user
     await Message.deleteMany({ user: tempUser.id });
+    await Entry.deleteMany({ user: tempUser.id });
     //delete user
     const user = await User.findByIdAndRemove(tempUser.id);
     res.status(200).json({ user });

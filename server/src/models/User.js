@@ -53,6 +53,7 @@ const userSchema = new Schema(
       sparse: true,
     },
     messages: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Message' }],
+    entries: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Entry' }],
   },
   { timestamps: true },
 );
